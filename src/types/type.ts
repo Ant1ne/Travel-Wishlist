@@ -1,1 +1,22 @@
-
+export type Country = {
+    name: {
+        common: string,
+        official: string,
+    };
+    currencies: {
+        name: string,
+        symbol: string
+    };
+    capital: string[];
+    region: string;
+    languages: {};
+    flag: string;
+    maps: {
+        googleMaps: string
+    };
+    population: number;
+    flags: {
+        png: string,
+        svg: string
+    };
+};
