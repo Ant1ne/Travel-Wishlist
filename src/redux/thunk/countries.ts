@@ -1,14 +1,22 @@
 import { AppDispatch } from "../store"
 
-import { countryActions } from "../slice/countries";
+import { actions } from "../slice/countries";
 
 const url ="https://restcountries.com/v3.1/all"
 
-export default function fetchCountryData() {
+export function fetchCountryData() {
   return async (dispatch: AppDispatch) => {
     const response = await fetch(url)
     const countryData = await response.json();
-    
-    dispatch(countryActions.getCountryData(countryData));
+
+    dispatch(actions.getCountryList(countryData));
+  }
+}
+
+export function fetchCountryItem (name: string | undefined) {
+  return async (dispatch: AppDispatch) => {
+    const response = await fetch(`url/${name}`)
+    const countryDetail = await response.json();
+    dispatch(actions.getCountryItem(countryDetail));
   }
 }
