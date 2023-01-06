@@ -1,40 +1,45 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../redux/store';
 
+// file
 import { Country } from '../../types/type';
+import { AppDispatch } from '../../redux/store';
 import { fetchCountryItem } from '../../redux/thunk/countries';
-import { actions } from '../../redux/slice/countries';
 
+// Mui
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import IconButton from '@mui/material/IconButton';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import BookmarkBorderSharpIcon from '@mui/icons-material/BookmarkBorderSharp';
+import BookmarkSharpIcon from '@mui/icons-material/BookmarkSharp';
+import ReadMoreIcon from '@mui/icons-material/ReadMore';
+
 
 
 type Prop = {
-    countryList: Country[];
     country: Country;
-    wish: boolean;
     addWishHandler: any;
-    // setWishCheck: React.Dispatch<React.SetStateAction<boolean>>;
+    wishCountries: Country[];
+    handleClick: Function;
+    handleWishClose: Function;
     style: object;
 }
 
 export default function CountryRow({
-    countryList,
     country,
-    wish,
     addWishHandler,
-    style,
-    // setWishCheck,
-    // wishCheck
+    wishCountries,
+    handleClick,
+    handleWishClose,
+    style
 }: Prop) {
 
-    // dispatch actions
+    // dispatch
     const dispatch = useDispatch<AppDispatch>();
+
+    const wish =  wishCountries.some(
+      (item) => item.name.common === country.name.common
+   );
 
   return (
     <TableRow
@@ -57,24 +62,37 @@ export default function CountryRow({
       <TableCell align='center' sx={style}>
         {country.region}
       </TableCell>
-      <TableCell align='center' sx={style}>
+      <TableCell align='right' sx={style}>
         {country.population}
       </TableCell>
       {/* <TableCell align='center' sx={style}>
         {country.languages}
       </TableCell> */}
       <TableCell align='center' sx={style}>
-        <IconButton aria-label="Add to wishlist">
-          <FavoriteIcon
-          onClick={addWishHandler}
-          sx={{ cursor: "pointer"}}
-          color='error'
-          />
-        </IconButton>
+        {!wish ?(
+            <BookmarkBorderSharpIcon
+              aria-label="Add to wishlist"
+              sx={{ cursor: 'pointer' }}
+              color='error'
+              onClick={() => {
+                addWishHandler(country);
+                // handleClick();
+              }}
+            />) : (
+            <BookmarkSharpIcon
+              aria-label="Added to wishlist"
+              sx={{ cursor: 'pointer' }}
+              color='error'
+              onClick={() => {
+                addWishHandler(country);
+                handleWishClose();
+              }}
+            />)}
+
       </TableCell>
       <TableCell align='center' sx={style}>
         <Link to={`/name/${country.name.common}`}>
-          <MoreHorizIcon
+          <ReadMoreIcon
             sx={{ cursor: 'pointer' }}
             onClick={() => {
               dispatch(fetchCountryItem(country.name.common));
@@ -85,4 +103,3 @@ export default function CountryRow({
     </TableRow>
   )
 }
-

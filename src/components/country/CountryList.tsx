@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '../../redux/store'
 
+
+// file
+import { AppDispatch, RootState } from '../../redux/store'
 import {fetchCountryData} from '../../redux/thunk/countries';
 import CountryRow from './CountryRow';
 import { Country } from "../../types/type";
 import { actions } from "../../redux/slice/countries";
+import LoadingPage from '../LoadingPage';
 
-
+// Mui
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -17,7 +20,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
 
-
+// Mui table function
 function createData(
     flag: string,
     name: {common: string; official: string},
@@ -43,12 +46,8 @@ export default function CountryList() {
     const wishCountries = useSelector(
         (state: RootState) => state.country.wish);
 
-    // // set state
-    // const [wishCheck, setWishCheck] = useState<boolean>(false);
-
-    // // get favorite array
-    // const wishArray = useSelector(
-    // (state: RootState) => state.country.wish);
+      const loading = useSelector(
+        (state: RootState) => state.country.showLoading);
 
     // dispatch for action
     const dispatch = useDispatch<AppDispatch>();
@@ -58,6 +57,7 @@ export default function CountryList() {
         dispatch(fetchCountryData());
         }, [dispatch]);
 
+        // Mui table rows
     const rows = countryList.map((country) =>
         createData(
             country.flag,
@@ -67,7 +67,8 @@ export default function CountryList() {
             country.languages,
             country.maps,
             country.flags,
-            country.wish
+            country.currencies,
+            country.capital
         )
       );
 
@@ -79,8 +80,8 @@ export default function CountryList() {
     };
 
     // Mui pagination for sticky table head
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
@@ -91,7 +92,9 @@ export default function CountryList() {
         setPage(0);
     };
 
-    // wish function
+    // Mui Snackbar
+
+    // wish function onClick function
     const addWishHandler = (wish: Country) => {
         const hasDuplicate = wishCountries.some(
         (country) =>
@@ -99,71 +102,76 @@ export default function CountryList() {
             wish.name.common.toLocaleLowerCase()
         );
         if (hasDuplicate) {
-        return alert("This country is already in your travel wishlist.");
+        return dispatch(actions.removeWish(wish.name.common));
         } else {
-        return dispatch(actions.addToWish(wish));
+        return dispatch(actions.addWish(wish));
         }
     };
 
   return (
-    <Paper sx={{
-        width: '90%',
-        overflow: 'hidden',
-        margin: 'auto'
-        }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-                <TableCell sx={style}>
-                    Flag
-                </TableCell>
-                <TableCell sx={style}>
-                    Name
-                </TableCell>
-                <TableCell sx={style}>
-                    Region
-                </TableCell>
-                <TableCell sx={style}>
-                    Population
-                </TableCell>
-                {/* <TableCell sx={style}>
-                    Languages
-                </TableCell> */}
-                <TableCell sx={style}>
-                    Travel Wishlist
-                </TableCell>
-                <TableCell sx={style}>
-                    More Details
-                </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => (
-                <CountryRow
-                    countryList={countryList}
-                    key={row.name.common}
-                    country={row}
-                    addWishHandler={addWishHandler}
-                    // setWishCheck={setWishCheck}
-                    // wishCheck={wishCheck}
-                    wish={row.wish}
-                />
-                ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 50, 75, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+    <div>
+      {loading ? (
+        <LoadingPage />
+      ) : (
+        <Paper sx={{
+            width: '90%',
+            overflow: 'hidden',
+            margin: 'auto'
+            }}>
+          <TableContainer sx={{ maxHeight: 440 }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                    <TableCell sx={style}>
+                        Flag
+                    </TableCell>
+                    <TableCell sx={style}>
+                        Name
+                    </TableCell>
+                    <TableCell sx={style}>
+                        Region
+                    </TableCell>
+                    <TableCell sx={style}>
+                        Population
+                    </TableCell>
+                    {/* <TableCell sx={style}>
+                        Languages
+                    </TableCell> */}
+                    <TableCell sx={style}>
+                        Travel Wishlist
+                    </TableCell>
+                    <TableCell sx={style}>
+                        More Details
+                    </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => (
+                    <CountryRow
+                        key={row.name.common}
+                        country={row}
+                        addWishHandler={addWishHandler}
+                        wishCountries={wishCountries}
+                        // handleClick={handleClick}
+                        // handleWishClose={handleWishClose}
+                    />
+                    ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 50, 75, 100]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      )}
+    </div>
   )
 }

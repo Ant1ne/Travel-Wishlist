@@ -9,7 +9,7 @@ export type Country = {
     };
     capital: string[];
     region: string;
-    languages: {};
+    languages: object;
     flag: string;
     maps: {
         googleMaps: string
@@ -20,5 +20,5 @@ export type Country = {
         svg: string
     };
     wish: boolean
-    
+
 };

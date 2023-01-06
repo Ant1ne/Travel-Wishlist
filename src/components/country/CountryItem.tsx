@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { AppDispatch, RootState } from '../../redux/store';
 
+// files
 import { actions } from '../../redux/slice/countries';
 import { Country } from '../../types/type';
+import { AppDispatch, RootState } from '../../redux/store';
 
+// Mui
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
@@ -21,10 +23,11 @@ export default function CountryItem() {
   const countryDetail = useSelector(
     (state: RootState) => state.country.country);
 
-  const wishListCountries = useSelector(
+  const wishCountries = useSelector(
     (state: RootState) => state.country.wish
   );
 
+  // set state
   const [loading, setLoading] = useState<boolean>(true);
 
     const country = countryDetail[0];
@@ -40,15 +43,15 @@ export default function CountryItem() {
     const dispatch = useDispatch<AppDispatch>();
 
   const wishBtnHandler = (wish: Country) => {
-    const hasDuplicate = wishListCountries.some(
+    const hasDuplicate = wishCountries.some(
       (country) =>
         country.name.common.toLocaleLowerCase() ===
         wish.name.common.toLocaleLowerCase()
     );
     if (hasDuplicate) {
-      alert('This country is already added in your wishlist.');
+      alert('This country is already in your wishlist.');
     } else {
-      dispatch(actions.addToWish(wish));
+      dispatch(actions.addWish(wish));
     }
   };
 
@@ -60,7 +63,7 @@ export default function CountryItem() {
         sx={{
           minWidth: 275,
           width: '400px',
-          height: '600px',
+          height: 'auto',
         }}
       >
         <CardMedia
@@ -88,9 +91,9 @@ export default function CountryItem() {
             <Typography>
               Languages:
             </Typography>
-            <Typography>
+            {/* <Typography>
               {country?.languages}
-            </Typography>
+            </Typography> */}
           </Typography>
           <Typography>
             <Typography>
@@ -111,7 +114,11 @@ export default function CountryItem() {
             <Button size='small'>Back</Button>
           </Link>
 
-          <Button size='small' onClick={() => wishBtnHandler(country)}>
+          <Button size='small'
+            onClick={() => {
+              wishBtnHandler(country);
+              // handleClick()
+            }}>
             Add to Wish list
           </Button>
         </CardActions>

@@ -6,14 +6,14 @@ type InitialState = {
     countries: Country[];
     country: Country[];
     wish: Country[]
-    wishListCountries: Country[]
+    showLoading: boolean;
 };
 
 const initialState: InitialState = {
     countries:[],
     country: [],
     wish: [],
-    wishListCountries:[],
+    showLoading: false,
 };
 
 const countrySlice = createSlice({
@@ -27,24 +27,17 @@ const countrySlice = createSlice({
         getCountryItem: (state, actions) => {
             state.country = actions.payload;
             },
-        addToWish: (state, actions) => {
+        addWish: (state, actions) => {
             state.wish.push({...actions.payload, wish: true});
             },
-        removeToWish: (state, actions) => {
+        removeWish: (state, actions) => {
             state.wish = actions.payload;
             },
-        // modifyWish: (state, action) => {
-        //         const index = state.countries.findIndex(
-        //           (country) =>
-        //             country.name.common.toLowerCase() ===
-        //             actions.payload.name.common.toLowerCase()
-        //         );
-        //         if (index !== -1) {
-        //           state.countries[index].wish = true;
-        //         }
-        //     },
+        showLoading: (state, actions) => {
+            state.showLoading = actions.payload;
+            },
         },
-    }
+    },
 );
 
 
