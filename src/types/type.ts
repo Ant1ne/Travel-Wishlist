@@ -19,6 +19,4 @@ export type Country = {
         png: string,
         svg: string
     };
-    wish: boolean
-
 };

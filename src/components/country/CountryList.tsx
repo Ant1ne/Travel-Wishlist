@@ -27,14 +27,12 @@ function createData(
     region: string,
     population: number,
     languages: object,
-    wish: boolean,
     maps: {googleMaps: string},
     flags: {png: string},
     currencies?: {name: string; symbol: string},
-    capital?: string[],
-
+    capital?: string[]
   ) {
-    return { flag, name, region, population, languages, wish };
+    return { flag, name, region, population, languages };
   }
 
 
@@ -134,9 +132,6 @@ export default function CountryList() {
                     <TableCell sx={style}>
                         Population
                     </TableCell>
-                    {/* <TableCell sx={style}>
-                        Languages
-                    </TableCell> */}
                     <TableCell sx={style}>
                         Travel Wishlist
                     </TableCell>

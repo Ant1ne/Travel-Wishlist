@@ -27,13 +27,6 @@ export default function FavoriteCountries() {
       dispatch(actions.removeWish(name));
     };
 
-    // Mui style
-    const style = {
-      fontFamily: 'nunito',
-      fontWeight: '900',
-      fontSize: '18px'
-    };
-
   return (
     <div className="favCard">
       {wish.length === 0 ? (

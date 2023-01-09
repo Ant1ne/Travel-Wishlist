@@ -10,6 +10,12 @@ export function fetchCountryData() {
     const response = await fetch(url)
     const countryData = await response.json();
 
+    if (countryData.length === 0 || countryData == null)
+    {
+      dispatch(actions.showLoading(true));
+    }
+
+
     dispatch(actions.getCountryList(countryData));
   }
 }

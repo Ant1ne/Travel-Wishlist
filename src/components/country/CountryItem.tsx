@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -30,7 +30,8 @@ export default function CountryItem() {
   // set state
   const [loading, setLoading] = useState<boolean>(true);
 
-    const country = countryDetail[0];
+  // variable for country
+  const country = countryDetail[0];
 
     // loading with useEffect
     useEffect(() => {
@@ -57,7 +58,7 @@ export default function CountryItem() {
 
   return (
     <div className="country-container">
-      {loading && <div> Loading... </div>}
+      {loading && <div>Loading...</div>}
       {!loading && (
         <Card
         sx={{
@@ -65,7 +66,7 @@ export default function CountryItem() {
           width: '400px',
           height: 'auto',
         }}
-      >
+        >
         <CardMedia
           component='img'
           height='230'
@@ -77,31 +78,28 @@ export default function CountryItem() {
             {country?.name.common}
           </Typography>
           <Typography sx={{ mb: 3 }} color='text.secondary'>
-            {country?.capital}
+            {country?.name.official}
           </Typography>
-          <Typography>
-            <Typography>
-              Population:
-            </Typography>
-            <Typography>
-              {country?.population}
-            </Typography>
-          </Typography>
-          <Typography>
-            <Typography>
-              Languages:
-            </Typography>
-            {/* <Typography>
-              {country?.languages}
-            </Typography> */}
-          </Typography>
-          <Typography>
-            <Typography>
-              Location:
-            </Typography>
-            <Typography>
-            {country?.maps.googleMaps}
-            </Typography>
+          <Typography variant='body2' component='div'>
+            <Fragment>
+              <b>Region:</b>
+              {country?.region}
+              <br/>
+              <b>Capital:</b>
+              {country?.capital ? country?.capital: 'No capital'}
+              <br/>
+              <b>Population:</b>
+              {country?.population.toLocaleString('en-US')}
+              <br/>
+              <b>Location:</b>
+              <a href={`${Object.values(country?.maps.googleMaps)[0]}`}
+                target='_blank'
+                rel='noreferrer'
+                style={{ textDecoration: 'none' }}
+                >
+                Where is it?
+                </a>
+            </Fragment>
           </Typography>
         </CardContent>
         <CardActions

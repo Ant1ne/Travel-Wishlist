@@ -21,17 +21,19 @@ const countrySlice = createSlice({
     initialState,
     reducers: {
         getCountryList: (state, actions) => {
-            state.countries = actions.payload.map((country: Country) =>
-            Object.assign({}, country, {wish: false})
-            );},
+            state.countries = actions.payload;
+            },
         getCountryItem: (state, actions) => {
             state.country = actions.payload;
             },
         addWish: (state, actions) => {
-            state.wish.push({...actions.payload, wish: true});
+            state.wish.push(actions.payload)
             },
         removeWish: (state, actions) => {
-            state.wish = actions.payload;
+            const filter = state.wish.filter(
+                (country) => country.name.common.toLocaleLowerCase()
+                !== actions.payload.toLocaleLowerCase());
+                state.wish = filter;
             },
         showLoading: (state, actions) => {
             state.showLoading = actions.payload;

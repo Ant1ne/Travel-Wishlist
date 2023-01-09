@@ -63,7 +63,7 @@ export default function CountryRow({
         {country.region}
       </TableCell>
       <TableCell align='right' sx={style}>
-        {country.population}
+        {country.population.toLocaleString('en-US')}
       </TableCell>
       {/* <TableCell align='center' sx={style}>
         {country.languages}
@@ -73,7 +73,6 @@ export default function CountryRow({
             <BookmarkBorderSharpIcon
               aria-label="Add to wishlist"
               sx={{ cursor: 'pointer' }}
-              color='error'
               onClick={() => {
                 addWishHandler(country);
                 // handleClick();
@@ -81,8 +80,10 @@ export default function CountryRow({
             />) : (
             <BookmarkSharpIcon
               aria-label="Added to wishlist"
-              sx={{ cursor: 'pointer' }}
-              color='error'
+              sx={{
+                cursor: 'pointer',
+                color: 'black'
+                }}
               onClick={() => {
                 addWishHandler(country);
                 handleWishClose();
@@ -91,7 +92,7 @@ export default function CountryRow({
 
       </TableCell>
       <TableCell align='center' sx={style}>
-        <Link to={`/name/${country.name.common}`}>
+        <Link to={`${country.name.common}`}>
           <ReadMoreIcon
             sx={{ cursor: 'pointer' }}
             onClick={() => {
