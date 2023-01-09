@@ -75,7 +75,7 @@ export default function CountryRow({
               sx={{ cursor: 'pointer' }}
               onClick={() => {
                 addWishHandler(country);
-                // handleClick();
+                handleClick();
               }}
             />) : (
             <BookmarkSharpIcon
@@ -92,7 +92,7 @@ export default function CountryRow({
 
       </TableCell>
       <TableCell align='center' sx={style}>
-        <Link to={`${country.name.common}`}>
+        <Link to={`/name/${country.name.common}`}>
           <ReadMoreIcon
             sx={{ cursor: 'pointer' }}
             onClick={() => {

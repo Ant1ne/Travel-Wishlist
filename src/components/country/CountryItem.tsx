@@ -17,9 +17,6 @@ import Typography from '@mui/material/Typography';
 
 export default function CountryItem() {
   // select store and state
-  const countryList = useSelector(
-    (state: RootState) => state.country.countries)
-
   const countryDetail = useSelector(
     (state: RootState) => state.country.country);
 
@@ -33,15 +30,15 @@ export default function CountryItem() {
   // variable for country
   const country = countryDetail[0];
 
-    // loading with useEffect
-    useEffect(() => {
-      if (countryDetail.length !== 0) {
-        setLoading(false);
-      }
-    }, [countryDetail.length]);
+  // loading with useEffect
+  useEffect(() => {
+    if (countryDetail.length !== 0) {
+      setLoading(false);
+    }
+  }, [countryDetail.length]);
 
-    // favorite button handler
-    const dispatch = useDispatch<AppDispatch>();
+  // favorite button handler
+  const dispatch = useDispatch<AppDispatch>();
 
   const wishBtnHandler = (wish: Country) => {
     const hasDuplicate = wishCountries.some(

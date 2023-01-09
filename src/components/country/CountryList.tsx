@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 
@@ -19,6 +19,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 // Mui table function
 function createData(
@@ -28,13 +32,20 @@ function createData(
     population: number,
     languages: object,
     maps: {googleMaps: string},
-    flags: {png: string},
-    currencies?: {name: string; symbol: string},
-    capital?: string[]
-  ) {
-    return { flag, name, region, population, languages };
+    flags: {png: string, svg: string;},
+    currencies: {name: string; symbol: string},
+    capital: string[]
+  ): Country {
+    return { flag, name, region, population, languages, maps, flags, currencies, capital };
   }
 
+  // Mui alert
+  const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref
+  ) {
+    return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
+  });
 
 export default function CountryList() {
     // select store
@@ -91,6 +102,62 @@ export default function CountryList() {
     };
 
     // Mui Snackbar
+    const [open, setOpen] = useState<boolean>(false);
+    const [openAlert, SetOpenAlert] = useState<boolean>(false);
+
+    const handleClick = () => {
+      setOpen(true);
+    };
+
+    const handleWishClose = () => {
+      SetOpenAlert(true);
+    };
+
+    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+
+      setOpen(false);
+    };
+
+    const handleCloseAlert = (
+      event: React.SyntheticEvent | Event,
+      reason?: string
+    ) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+
+      SetOpenAlert(false);
+    };
+
+    // Mui Snackbar actions
+    const action = (
+      <Fragment>
+        <IconButton
+          size='small'
+          aria-label='close'
+          color='primary'
+          onClick={handleClose}
+        >
+        <CloseIcon fontSize='small' />
+      </IconButton>
+    </Fragment>
+  );
+
+    const actionAlert = (
+      <Fragment>
+        <IconButton
+          size='small'
+          aria-label='close'
+          color='primary'
+          onClick={handleCloseAlert}
+        >
+          <CloseIcon fontSize='small' />
+        </IconButton>
+      </Fragment>
+    )
 
     // wish function onClick function
     const addWishHandler = (wish: Country) => {
@@ -149,8 +216,9 @@ export default function CountryList() {
                         country={row}
                         addWishHandler={addWishHandler}
                         wishCountries={wishCountries}
-                        // handleClick={handleClick}
-                        // handleWishClose={handleWishClose}
+                        style={style}
+                        handleClick={handleClick}
+                        handleWishClose={handleWishClose}
                     />
                     ))}
               </TableBody>
@@ -167,6 +235,38 @@ export default function CountryList() {
           />
         </Paper>
       )}
+      <div>
+        <Snackbar
+            open={open}
+            autoHideDuration={2000}
+            onClose={handleClose}
+            action={action}
+          >
+          <Alert
+            onClose={handleClose}
+            severity='info'
+            sx={{ width: '100%' }}
+          >
+            The country is successfully added to your travel wishlist
+          </Alert>
+        </Snackbar>
+      </div>
+      <div>
+        <Snackbar
+          open={openAlert}
+          autoHideDuration={2000}
+          onClose={handleCloseAlert}
+          action={actionAlert}
+        >
+          <Alert
+            onClose={handleCloseAlert}
+            severity='info'
+            sx={{ width: '100%' }}
+          >
+            The country is removed from your travel wishlist
+          </Alert>
+        </Snackbar>
+      </div>
     </div>
   )
 }
