@@ -42,7 +42,7 @@ export default function CountryRow({
    );
 
   return (
-    <TableRow
+    <TableRow className="country-row"
       sx={{
         '&:last-child td, &:last-child th': { border: 0 },
       }}
@@ -52,9 +52,8 @@ export default function CountryRow({
         component='th'
         align='center'
         scope='row'
-        sx={{ fontSize: '30px' }}
       >
-        {country.flag}
+        <img src={country.flags.svg} alt={country.name.common} />
       </TableCell>
       <TableCell align='center' sx={style}>
         {country.name.common}
@@ -65,9 +64,6 @@ export default function CountryRow({
       <TableCell align='right' sx={style}>
         {country.population.toLocaleString('en-US')}
       </TableCell>
-      {/* <TableCell align='center' sx={style}>
-        {country.languages}
-      </TableCell> */}
       <TableCell align='center' sx={style}>
         {!wish ?(
             <BookmarkBorderSharpIcon

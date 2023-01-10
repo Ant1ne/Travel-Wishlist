@@ -7,6 +7,7 @@ import FavoritePage from "./pages/FavoritePage";
 import Home from "./pages/Home";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import CountryItem from "./components/country/CountryItem";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Route path="/" element={<Home />}></Route>
       <Route path="/wishlist" element={<FavoritePage />}></Route>
       <Route path="/about" element={<About />}></Route>
+      <Route path="/name/:country" element={<CountryItem />}></Route>
     </Routes>
     <Footer />
   </div>;

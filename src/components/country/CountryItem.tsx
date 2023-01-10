@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 // files
 import { actions } from '../../redux/slice/countries';
@@ -16,6 +17,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 export default function CountryItem() {
+
   // select store and state
   const countryDetail = useSelector(
     (state: RootState) => state.country.country);
@@ -23,12 +25,16 @@ export default function CountryItem() {
   const wishCountries = useSelector(
     (state: RootState) => state.country.wish
   );
-
+    const countryList = useSelector(
+      (state: RootState) => state.country.countries
+    );
   // set state
   const [loading, setLoading] = useState<boolean>(true);
 
   // variable for country
-  const country = countryDetail[0];
+  let {country} = useParams();
+  const countryItem = countryDetail[0];
+  const index = countryList.findIndex(c => c.name.common === country)
 
   // loading with useEffect
   useEffect(() => {
@@ -67,34 +73,52 @@ export default function CountryItem() {
         <CardMedia
           component='img'
           height='230'
-          image={`${country?.flags.svg}`}
-          alt={`${country?.name.common}`}
+          image={`${countryList[index]?.flags.svg}`}
+          alt={`${countryList[index]?.name.common}`}
         />
         <CardContent>
-          <Typography variant='h5' component='div'>
-            {country?.name.common}
+          <Typography
+            variant='h5'
+            component='div'
+            sx={{ fontFamily: 'nunito', fontWeight: '800' }}>
+            {countryList[index]?.name.common}
           </Typography>
-          <Typography sx={{ mb: 3 }} color='text.secondary'>
-            {country?.name.official}
+          <Typography sx={{ mb: 3, fontFamily: 'nunito'}} color='text.secondary'>
+            {countryList[index]?.name.official}
           </Typography>
-          <Typography variant='body2' component='div'>
+          <Typography
+            variant='body2'
+            component='div'
+            sx={{
+              textAlign: 'left',
+              marginLeft: '23%',
+              fontFamily: 'nunito',
+              fontSize: '18px'
+            }}
+          >
             <Fragment>
               <b>Region:</b>
-              {country?.region}
+              {countryList[index]?.region}
               <br/>
               <b>Capital:</b>
-              {country?.capital ? country?.capital: 'No capital'}
+              {countryList[index]?.capital ? countryList[index]?.capital: 'No capital'}
               <br/>
               <b>Population:</b>
-              {country?.population.toLocaleString('en-US')}
+              {countryList[index]?.population.toLocaleString('en-US')}
               <br/>
-              <b>Location:</b>
-              <a href={`${Object.values(country?.maps.googleMaps)[0]}`}
+              <b>Languages:</b>
+              {
+                countryList[index].languages ? Object.values
+                (countryList[index].languages).map((language) => (
+                  <li key={crypto.randomUUID()}>{language}</li>
+                  )) : null
+              }
+              <a href={`${Object.values(countryList[index]?.maps)[0]}`}
                 target='_blank'
                 rel='noreferrer'
-                style={{ textDecoration: 'none' }}
+                style={{ textDecoration: 'underline' }}
                 >
-                Where is it?
+                Where is it located?
                 </a>
             </Fragment>
           </Typography>
@@ -105,17 +129,21 @@ export default function CountryItem() {
             justifyContent: 'space-between',
           }}
         >
-          <Link to='/'>
-            <Button size='small'>Back</Button>
+          <Link to='/' style={{ textDecoration: 'none' }}>
+            <Button size='small' sx={{ fontFamily: 'nunito' }}>
+              Back
+            </Button>
           </Link>
 
-          <Button size='small'
-            onClick={() => {
-              wishBtnHandler(country);
-              // handleClick()
-            }}>
-            Add to Wish list
-          </Button>
+          <Button
+              size='small'
+              sx={{ fontFamily: 'nunito' }}
+              onClick={() => {
+                wishBtnHandler(countryItem);
+              }}
+            >
+              Add to Wishlist
+            </Button>
         </CardActions>
       </Card>
       )}

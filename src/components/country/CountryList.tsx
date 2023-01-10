@@ -84,7 +84,7 @@ export default function CountryList() {
     // Mui style
     const style = {
         fontFamily: 'nunito',
-        fontWeight: '900',
+        fontWeight: '800',
         fontSize: '18px'
     };
 
@@ -183,7 +183,7 @@ export default function CountryList() {
             overflow: 'hidden',
             margin: 'auto'
             }}>
-          <TableContainer sx={{ maxHeight: 440 }}>
+          <TableContainer sx={{ maxHeight: 480 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
