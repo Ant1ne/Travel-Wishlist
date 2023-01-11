@@ -23,6 +23,9 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { Box, Typography } from "@mui/material";
 
 // Mui table function
 function createData(
@@ -174,6 +177,15 @@ export default function CountryList() {
         }
     };
 
+    const [click, setClick] = useState(false);
+    const dispatchSort = useDispatch();
+    const handleOnSort: React.MouseEventHandler<HTMLTableCellElement> = (e) => {
+      e.preventDefault();
+      !click
+        ? dispatchSort(actions.sortByName()) && setClick(true)
+        : dispatchSort(actions.sortByNameReverse()) && setClick(false);
+    };
+
   return (
     <div className="countryList-container">
       {loading ? (
@@ -191,8 +203,12 @@ export default function CountryList() {
                     <TableCell sx={style}>
                         Flag
                     </TableCell>
-                    <TableCell sx={style}>
-                        Name
+                    <TableCell sx={style} onClick={handleOnSort}>
+                      <Box>
+                        <Typography component="span">Name</Typography>
+                          <ArrowDropUpIcon />
+                          <ArrowDropDownIcon />
+                      </Box>
                     </TableCell>
                     <TableCell sx={style}>
                         Region
