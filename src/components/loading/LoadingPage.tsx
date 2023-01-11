@@ -11,7 +11,9 @@ export default function LoadingPage() {
         marginTop: '10%',
       }}
     >
-      <CircularProgress size='5rem' />
+      <div className="loader">
+        <CircularProgress size='5rem' />
+      </div>
     </Box>
   )
 }

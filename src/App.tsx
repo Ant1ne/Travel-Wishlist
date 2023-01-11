@@ -5,9 +5,9 @@ import "./App.css";
 import About from "./pages/About";
 import FavoritePage from "./pages/FavoritePage";
 import Home from "./pages/Home";
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
-import CountryItem from "./components/country/CountryItem";
+import NavBar from "./components/navBar/NavBar";
+import Footer from "./components/footer/Footer";
+import CountryItem from "./components/country/countryItem/CountryItem";
 
 
 function App() {

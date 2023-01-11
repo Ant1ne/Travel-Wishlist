@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Search from "../components/Search";
-import CountryList from "../components/country/CountryList"
+import Search from "../components/search/Search";
+import CountryList from "../components/country/countryList/CountryList"
 
 export default function Home() {
   return (

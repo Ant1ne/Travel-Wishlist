@@ -1,12 +1,10 @@
 import React, { useEffect, useState, Fragment } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 // files
-import { actions } from '../../redux/slice/countries';
-import { Country } from '../../types/type';
-import { AppDispatch, RootState } from '../../redux/store';
+import { RootState } from '../../../redux/store';
 
 // Mui
 import Box from '@mui/material/Box';
@@ -24,9 +22,6 @@ export default function CountryItem() {
   const countryDetail = useSelector(
     (state: RootState) => state.country.country);
 
-  const wishCountries = useSelector(
-    (state: RootState) => state.country.wish
-  );
     const countryList = useSelector(
       (state: RootState) => state.country.countries
     );
@@ -114,14 +109,9 @@ export default function CountryItem() {
               </Fragment>
             </Typography>
           </CardContent>
-          <CardActions
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
+          <CardActions>
             <Link to='/' style={{ textDecoration: 'none' }}>
-              <Button size='small' sx={{ fontFamily: 'nunito' }}>
+              <Button size='small' sx={{ fontFamily: 'nunito'}}>
                 Back
               </Button>
             </Link>

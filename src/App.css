@@ -67,6 +67,22 @@ a, a:visited, a:hover, a:active {
   padding-bottom: 450px;
 }
 
+/* Loading Page */
+.loader {
+  height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
 /* Footer */
 .footer {
   margin: 0px;

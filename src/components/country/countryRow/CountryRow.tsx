@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 // file
-import { Country } from '../../types/type';
-import { AppDispatch } from '../../redux/store';
-import { fetchCountryItem } from '../../redux/thunk/countries';
+import { Country } from '../../../types/type';
+import { AppDispatch } from '../../../redux/store';
+import { fetchCountryItem } from '../../../redux/thunk/countries';
 
 // Mui
 import TableRow from '@mui/material/TableRow';

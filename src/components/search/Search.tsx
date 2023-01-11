@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch} from "react-redux"
 
-import { AppDispatch, RootState } from "../redux/store";
-import { actions } from "../redux/slice/countries";
-import { fetchCountryData } from '../redux/thunk/countries';
+import { AppDispatch, RootState } from "../../redux/store";
+import { actions } from "../../redux/slice/countries";
+import { fetchCountryData } from '../../redux/thunk/countries';
 
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField';

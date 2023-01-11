@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 
 
 // file
-import { AppDispatch, RootState } from '../../redux/store'
-import {fetchCountryData} from '../../redux/thunk/countries';
-import CountryRow from './CountryRow';
-import { Country } from "../../types/type";
-import { actions } from "../../redux/slice/countries";
-import LoadingPage from '../LoadingPage';
+import { AppDispatch, RootState } from '../../../redux/store'
+import {fetchCountryData} from '../../../redux/thunk/countries';
+import CountryRow from '../countryRow/CountryRow';
+import { Country } from "../../../types/type";
+import { actions } from "../../../redux/slice/countries";
+import LoadingPage from '../../loading/LoadingPage';
 
 // Mui
 import Table from '@mui/material/Table';

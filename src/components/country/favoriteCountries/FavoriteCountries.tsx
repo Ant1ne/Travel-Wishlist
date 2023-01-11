@@ -2,16 +2,15 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 // file
-import { RootState, AppDispatch } from '../../redux/store'
-import { actions } from '../../redux/slice/countries';
+import { RootState, AppDispatch } from '../../../redux/store'
+import { actions } from '../../../redux/slice/countries';
 
 // Mui
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-
-
+import CardMedia from '@mui/material/CardMedia';
 
 
 export default function FavoriteCountries() {
@@ -53,14 +52,27 @@ export default function FavoriteCountries() {
             <Paper
               sx={{
                 margin: 'auto',
-                marginTop: '1%',
-                marginBottom: '1%',
+                marginTop: '2%',
+                marginBottom: '2%',
                 maxWidth: 500,
                 flexGrow: 1
               }}
             >
               <Grid container spacing={3}>
-              <Grid item xs={12} sm container>
+                <Grid item xs={12} sm container>
+                  <Grid item>
+                    <CardMedia
+                      component='img'
+                      image={`${country.flags.svg}`}
+                      alt={`${country.name.common}`}
+                      sx={{
+                      width: '128',
+                      height: '128',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      }}
+                    />
+                  </Grid>
                   <Grid item xs container direction='column' spacing={2}>
                     <Grid item xs>
                       <Typography
@@ -77,8 +89,6 @@ export default function FavoriteCountries() {
                         sx={{
                           fontFamily: 'nunito',
                           fontSize: '17px',
-                          textAlign: 'center',
-                          marginLeft: '28%',
                         }}
                         gutterBottom
                       >
@@ -94,7 +104,7 @@ export default function FavoriteCountries() {
                       <Typography
                         sx={{
                           cursor: 'pointer',
-                          color: '#3d5fa3',
+                          color: 'black',
                           fontFamily: 'nunito',
                           fontWeight: '800',
                         }}

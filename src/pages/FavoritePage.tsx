@@ -1,6 +1,6 @@
 import React from 'react'
 
-import FavoriteCountries from '../components/country/FavoriteCountries';
+import FavoriteCountries from '../components/country/favoriteCountries/FavoriteCountries';
 
 
 export default function FavoritePage() {
