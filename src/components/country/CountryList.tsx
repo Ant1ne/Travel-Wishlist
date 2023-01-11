@@ -205,7 +205,7 @@ export default function CountryList() {
                     </TableCell>
                     <TableCell sx={style} onClick={handleOnSort}>
                       <Box>
-                        <Typography component="span">Name</Typography>
+                        <Typography component="span" sx={style}>Name</Typography>
                           <ArrowDropUpIcon />
                           <ArrowDropDownIcon />
                       </Box>
