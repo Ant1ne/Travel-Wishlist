@@ -58,9 +58,6 @@ export default function CountryList() {
     const wishCountries = useSelector(
         (state: RootState) => state.country.wish);
 
-      const loading = useSelector(
-        (state: RootState) => state.country.showLoading);
-
     // dispatch for action
     const dispatch = useDispatch<AppDispatch>();
 
@@ -177,6 +174,7 @@ export default function CountryList() {
         }
     };
 
+    // sort by name
     const [click, setClick] = useState(false);
     const dispatchSort = useDispatch();
     const handleOnSort: React.MouseEventHandler<HTMLTableCellElement> = (e) => {
@@ -249,7 +247,6 @@ export default function CountryList() {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
-      )
       <div>
         <Snackbar
             open={open}

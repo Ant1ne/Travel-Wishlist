@@ -54,7 +54,7 @@ export default function Search() {
       >
         <TextField
           id="standard-search"
-          label="Please enter country's name"
+          label="Please search country's name"
           type="search"
           variant="standard"
           value={userInput}

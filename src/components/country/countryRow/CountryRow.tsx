@@ -1,11 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
 // file
 import { Country } from '../../../types/type';
-import { AppDispatch } from '../../../redux/store';
-import { fetchCountryItem } from '../../../redux/thunk/countries';
 
 // Mui
 import TableRow from '@mui/material/TableRow';
@@ -33,9 +30,6 @@ export default function CountryRow({
     handleWishClose,
     style
 }: Prop) {
-
-    // dispatch
-    const dispatch = useDispatch<AppDispatch>();
 
     const wish =  wishCountries.some(
       (item) => item.name.common === country.name.common

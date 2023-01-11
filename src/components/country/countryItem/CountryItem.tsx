@@ -1,10 +1,12 @@
-import React, { Fragment } from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect, Fragment } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 // files
-import { RootState } from '../../../redux/store';
+import { RootState, AppDispatch } from '../../../redux/store';
+import { actions } from '../../../redux/slice/countries';
+import { fetchCountryItem } from '../../../redux/thunk/countries';
 import LoadingPage from '../../loading/LoadingPage';
 
 // Mui
@@ -14,6 +16,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Country } from '../../../types/type';
 
 
 export default function CountryItem() {
@@ -22,24 +25,50 @@ export default function CountryItem() {
   const countryDetail = useSelector(
     (state: RootState) => state.country.country);
 
-    const countryList = useSelector(
-      (state: RootState) => state.country.countries
-    );
+  const wishCountries = useSelector(
+    (state: RootState) => state.country.wish);
+
+  const countryList = useSelector(
+    (state: RootState) => state.country.countries);
 
   // variable for country
   let {country} = useParams();
   const countryItem = countryDetail[0];
   const index = countryList.findIndex(c => c.name.common === country)
 
+  // useEffect to fetch country data
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    dispatch(fetchCountryItem(country))
+  }, [country, dispatch])
+
+  // favorite button handler
+  const wishBtnHandler = (wish: Country) => {
+    const hasDuplicate = wishCountries.some(
+      (country) =>
+        country.name.common.toLocaleLowerCase() ===
+        wish.name.common.toLocaleLowerCase()
+    );
+    if (hasDuplicate) {
+      alert('This country is already in your wishlist.');
+    } else {
+      dispatch(actions.addWish(wish));
+    }
+  };
 
   return (
-    <div className="country-container">
+    <div className="country-container"
+      style={
+        { display: "flex",
+          justifyContent: "center"
+        }}>
       {!countryItem  && ( <LoadingPage/>)}
         <Card
         sx={{
           minWidth: 275,
-          width: '400px',
+          width: '300',
           height: 'auto',
+          flexDirection: 'row',
         }}
         >
         <CardMedia
@@ -69,22 +98,23 @@ export default function CountryItem() {
             }}
           >
             <Fragment>
-              <b>Region:</b>
+              <b>Region: </b>
               {countryList[index]?.region}
               <br/>
-              <b>Capital:</b>
+              <b>Capital: </b>
               {countryList[index]?.capital ? countryList[index]?.capital: 'No capital'}
               <br/>
-              <b>Population:</b>
+              <b>Population: </b>
               {countryList[index]?.population.toLocaleString('en-US')}
               <br/>
-              <b>Languages:</b>
+              <b>Languages: </b>
               {
                 countryList[index].languages ? Object.values
                 (countryList[index].languages).map((languages) => (
                   <li key={crypto.randomUUID()}>{languages}</li>
                   )) : null
               }
+              <br/>
               <a href={`${Object.values(countryList[index]?.maps)[0]}`}
                 target='_blank'
                 rel='noreferrer'
@@ -106,6 +136,16 @@ export default function CountryItem() {
               Back
             </Button>
           </Link>
+
+          <Button
+              size='small'
+              sx={{ fontFamily: 'nunito' }}
+              onClick={() => {
+                wishBtnHandler(countryItem);
+              }}
+            >
+              Add to Wishlist
+            </Button>
         </CardActions>
       </Card>
     </div>
