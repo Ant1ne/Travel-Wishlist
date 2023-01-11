@@ -4,8 +4,7 @@
   position: relative;
   text-align: center;
   font-family: 'Nunito', sans-serif;
-  position: relative;
-  color: #f7f7f7;
+  color: #fff;
   min-height: 100vh;
 }
 
@@ -50,7 +49,6 @@ a, a:visited, a:hover, a:active {
   margin-left: 10px;
 }
 
-/* Country Row */
 .country-row img {
   width: 100px;
   border: 1px solid lightgray;
@@ -58,7 +56,7 @@ a, a:visited, a:hover, a:active {
 
 .country-container {
   padding-bottom: 80px;
-  position: relative
+  position: center;
 }
 
 /* About */
@@ -66,62 +64,21 @@ a, a:visited, a:hover, a:active {
   color: black;
   position: relative;
   text-align: center;
+  padding-bottom: 450px;
 }
 
 /* Footer */
-.footer-distributed {
-  background-color: #292c2f;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
-  box-sizing: border-box;
+.footer {
+  margin: 0px;
+  padding: 50px;
   width: 100%;
-  text-align: left;
-  font: normal 16px sans-serif;
-  padding: 45px 50px;
+  display: flex;
+  position: relative;
+  bottom: 0px;
+  justify-content: center;
 }
 
-.footer-distributed p.footer-links {
-  font-size: 18px;
-  font-weight: bold;
-  color: #ffffff;
-  margin: 0 0 10px;
-  padding: 0;
-  transition: ease .25s;
-}
-
-.footer-distributed p.footer-links a {
-  display: inline-block;
-  line-height: 1.8;
-  text-decoration: none;
-  color: inherit;
-  transition: ease .25s;
-}
-
-.footer-distributed .footer-links a:before {
-  content: "·";
-  font-size: 20px;
-  left: 0;
-  color: #fff;
-  display: inline-block;
-  padding-right: 5px;
-}
-
-.footer-distributed .footer-right {
-  float: right;
-  margin-top: 6px;
-  max-width: 180px;
-}
-
-/* Media Queries */
-
-@media (max-width: 600px) {
-  .footer-distributed .footer-left, .footer-distributed .footer-right {
-    text-align: center;
-  }
-  .footer-distributed .footer-right {
-    float: none;
-    margin: 0 auto 20px;
-  }
-  .footer-distributed .footer-left p.footer-links {
-    line-height: 1.8;
-  }
+.footer p {
+  justify-self: center;
+  align-self: center;
 }

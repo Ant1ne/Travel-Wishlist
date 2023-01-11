@@ -84,8 +84,9 @@ export default function CountryList() {
     // Mui style
     const style = {
         fontFamily: 'nunito',
-        fontWeight: '800',
-        fontSize: '18px'
+        fontWeight: '700',
+        fontSize: '17px',
+        textAlign: 'center'
     };
 
     // Mui pagination for sticky table head
@@ -174,7 +175,7 @@ export default function CountryList() {
     };
 
   return (
-    <div>
+    <div className="countryList-container">
       {loading ? (
         <LoadingPage />
       ) : (
@@ -183,9 +184,9 @@ export default function CountryList() {
             overflow: 'hidden',
             margin: 'auto'
             }}>
-          <TableContainer sx={{ maxHeight: 480 }}>
+          <TableContainer sx={{ maxHeight: 470 }}>
             <Table stickyHeader aria-label="sticky table">
-              <TableHead>
+              <TableHead sx={style}>
                 <TableRow>
                     <TableCell sx={style}>
                         Flag

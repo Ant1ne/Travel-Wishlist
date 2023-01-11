@@ -72,17 +72,6 @@ export default function FavoriteCountries() {
                         <b>Country: </b>
                         {country.name.common}
                       </Typography>
-                      {/* <Typography
-                        variant='body2'
-                        sx={{
-                          fontFamily: 'nunito',
-                          fontSize: '17px',
-                          textAlign: 'left',
-                          marginLeft: '28%',
-                        }}
-                        gutterBottom>
-                          {country.flags.png}
-                      </Typography> */}
                       <Typography
                         variant='body2'
                         sx={{
@@ -99,7 +88,6 @@ export default function FavoriteCountries() {
                         <b>Region: </b>
                         {country.region}
                         <br />
-                        {/* <b>Languages: </b> */}
                       </Typography>
                     </Grid>
                     <Grid item>
@@ -113,7 +101,6 @@ export default function FavoriteCountries() {
                         variant='body2'
                         onClick={() => {
                           handleRemove(country.name.common);
-                          // handleClick();
                         }}
                       >
                         Remove

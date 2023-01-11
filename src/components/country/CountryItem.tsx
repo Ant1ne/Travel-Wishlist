@@ -9,12 +9,14 @@ import { Country } from '../../types/type';
 import { AppDispatch, RootState } from '../../redux/store';
 
 // Mui
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+
 
 export default function CountryItem() {
 
@@ -43,109 +45,89 @@ export default function CountryItem() {
     }
   }, [countryDetail.length]);
 
-  // favorite button handler
-  const dispatch = useDispatch<AppDispatch>();
-
-  const wishBtnHandler = (wish: Country) => {
-    const hasDuplicate = wishCountries.some(
-      (country) =>
-        country.name.common.toLocaleLowerCase() ===
-        wish.name.common.toLocaleLowerCase()
-    );
-    if (hasDuplicate) {
-      alert('This country is already in your wishlist.');
-    } else {
-      dispatch(actions.addWish(wish));
-    }
-  };
 
   return (
     <div className="country-container">
       {loading && <div>Loading...</div>}
       {!loading && (
-        <Card
-        sx={{
-          minWidth: 275,
-          width: '400px',
-          height: 'auto',
-        }}
-        >
-        <CardMedia
-          component='img'
-          height='230'
-          image={`${countryList[index]?.flags.svg}`}
-          alt={`${countryList[index]?.name.common}`}
-        />
-        <CardContent>
-          <Typography
-            variant='h5'
-            component='div'
-            sx={{ fontFamily: 'nunito', fontWeight: '800' }}>
-            {countryList[index]?.name.common}
-          </Typography>
-          <Typography sx={{ mb: 3, fontFamily: 'nunito'}} color='text.secondary'>
-            {countryList[index]?.name.official}
-          </Typography>
-          <Typography
-            variant='body2'
-            component='div'
-            sx={{
-              textAlign: 'left',
-              marginLeft: '23%',
-              fontFamily: 'nunito',
-              fontSize: '18px'
-            }}
-          >
-            <Fragment>
-              <b>Region:</b>
-              {countryList[index]?.region}
-              <br/>
-              <b>Capital:</b>
-              {countryList[index]?.capital ? countryList[index]?.capital: 'No capital'}
-              <br/>
-              <b>Population:</b>
-              {countryList[index]?.population.toLocaleString('en-US')}
-              <br/>
-              <b>Languages:</b>
-              {
-                countryList[index].languages ? Object.values
-                (countryList[index].languages).map((language) => (
-                  <li key={crypto.randomUUID()}>{language}</li>
-                  )) : null
-              }
-              <a href={`${Object.values(countryList[index]?.maps)[0]}`}
-                target='_blank'
-                rel='noreferrer'
-                style={{ textDecoration: 'underline' }}
-                >
-                Where is it located?
-                </a>
-            </Fragment>
-          </Typography>
-        </CardContent>
-        <CardActions
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Card
+          variant="outlined"
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
+            minWidth: 275,
+            width: '400px',
+            height: 'auto',
+            alignItems:'center',
           }}
-        >
-          <Link to='/' style={{ textDecoration: 'none' }}>
-            <Button size='small' sx={{ fontFamily: 'nunito' }}>
-              Back
-            </Button>
-          </Link>
-
-          <Button
-              size='small'
-              sx={{ fontFamily: 'nunito' }}
-              onClick={() => {
-                wishBtnHandler(countryItem);
+          >
+          <CardMedia
+            component='img'
+            height='230'
+            image={`${countryList[index]?.flags.svg}`}
+            alt={`${countryList[index]?.name.common}`}
+          />
+          <CardContent>
+            <Typography
+              variant='h5'
+              component='div'
+              sx={{ fontFamily: 'nunito', fontWeight: '800' }}>
+              {countryList[index]?.name.common}
+            </Typography>
+            <Typography sx={{ mb: 3, fontFamily: 'nunito'}} color='text.secondary'>
+              {countryList[index]?.name.official}
+            </Typography>
+            <Typography
+              variant='body2'
+              component='div'
+              sx={{
+                textAlign: 'left',
+                marginLeft: '23%',
+                fontFamily: 'nunito',
+                fontSize: '18px'
               }}
             >
-              Add to Wishlist
-            </Button>
-        </CardActions>
-      </Card>
+              <Fragment>
+                <b>Region: </b>
+                {countryList[index]?.region}
+                <br/>
+                <b>Capital: </b>
+                {countryList[index]?.capital ? countryList[index]?.capital: 'No capital'}
+                <br/>
+                <b>Population: </b>
+                {countryList[index]?.population.toLocaleString('en-US')}
+                <br/>
+                <b>Languages: </b>
+                {
+                  countryList[index].languages ? Object.values
+                  (countryList[index].languages).map((language) => (
+                    <li key={crypto.randomUUID()}>{language}</li>
+                    )) : null
+                }
+                <br/>
+                <a href={`${Object.values(countryList[index]?.maps)[0]}`}
+                  target='_blank'
+                  rel='noreferrer'
+                  style={{ textDecoration: 'underline' }}
+                  >
+                  Where is it located?
+                  </a>
+              </Fragment>
+            </Typography>
+          </CardContent>
+          <CardActions
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Link to='/' style={{ textDecoration: 'none' }}>
+              <Button size='small' sx={{ fontFamily: 'nunito' }}>
+                Back
+              </Button>
+            </Link>
+          </CardActions>
+        </Card>
+        </Box>
       )}
     </div>
   )
