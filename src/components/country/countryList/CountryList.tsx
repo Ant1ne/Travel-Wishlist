@@ -188,9 +188,7 @@ export default function CountryList() {
 
   return (
     <div className="countryList-container">
-      {loading ? (
-        <LoadingPage />
-      ) : (
+      {!countryList  && ( <LoadingPage/>)}
         <Paper sx={{
             width: '90%',
             overflow: 'hidden',
@@ -251,7 +249,7 @@ export default function CountryList() {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
-      )}
+      )
       <div>
         <Snackbar
             open={open}

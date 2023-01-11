@@ -91,9 +91,6 @@ export default function CountryRow({
         <Link to={`/name/${country.name.common}`}>
           <ReadMoreIcon
             sx={{ cursor: 'pointer' }}
-            onClick={() => {
-              dispatch(fetchCountryItem(country.name.common));
-            }}
           />
         </Link>
       </TableCell>
