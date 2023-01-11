@@ -2,6 +2,8 @@
 
 The front end project is to practice React with TypeScript and Redux. Completing all requirement, you will get 20 points/ 20 points. Good luck and HAVE FUN !!!
 
+# Link of deployed project
+https://front-end-project-alpha.vercel.app/
 ## How to run project
 
 1. Step 1: yarn
