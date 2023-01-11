@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react'
+import React, { useEffect, Fragment, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { RootState, AppDispatch } from '../../../redux/store';
 import { actions } from '../../../redux/slice/countries';
 import { fetchCountryItem } from '../../../redux/thunk/countries';
 import LoadingPage from '../../loading/LoadingPage';
+import { Country } from '../../../types/type';
 
 // Mui
 import Card from '@mui/material/Card';
@@ -16,7 +17,18 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Country } from '../../../types/type';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+
+  // Mui alert
+  const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref
+  ) {
+    return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
+  });
 
 
 export default function CountryItem() {
@@ -55,6 +67,35 @@ export default function CountryItem() {
       dispatch(actions.addWish(wish));
     }
   };
+
+      // Mui Snackbar
+      const [open, setOpen] = useState<boolean>(false);
+
+      const handleClick = () => {
+        setOpen(true);
+      };
+
+      const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+
+        setOpen(false);
+      };
+
+      // Mui Snackbar actions
+      const action = (
+        <Fragment>
+          <IconButton
+            size='small'
+            aria-label='close'
+            color='primary'
+            onClick={handleClose}
+          >
+          <CloseIcon fontSize='small' />
+        </IconButton>
+      </Fragment>
+    );
 
   return (
     <div className="country-container"
@@ -142,12 +183,29 @@ export default function CountryItem() {
               sx={{ fontFamily: 'nunito' }}
               onClick={() => {
                 wishBtnHandler(countryItem);
+                handleClick();
               }}
             >
               Add to Wishlist
             </Button>
         </CardActions>
       </Card>
+      <div>
+        <Snackbar
+            open={open}
+            autoHideDuration={2000}
+            onClose={handleClose}
+            action={action}
+          >
+          <Alert
+            onClose={handleClose}
+            severity='info'
+            sx={{ width: '100%' }}
+          >
+            The country is successfully added to your travel wishlist
+          </Alert>
+        </Snackbar>
+      </div>
     </div>
   )
 }
