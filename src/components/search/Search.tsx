@@ -7,6 +7,7 @@ import { fetchCountryData } from '../../redux/thunk/countries';
 
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField';
+import Tooltip from '@mui/material/Tooltip';
 
 
 export default function Search() {
@@ -52,14 +53,17 @@ export default function Search() {
         noValidate
         autoComplete="off"
       >
-        <TextField
-          id="standard-search"
-          label="Please search country's name"
-          type="search"
-          variant="standard"
-          value={userInput}
-          onChange={userInputHandler}
-        />
+        <Tooltip title="Search country's name">
+          <TextField
+            id="standard-search"
+            label="Please search country's name"
+            type="search"
+            variant="standard"
+            value={userInput}
+            onChange={userInputHandler}
+          />
+        </Tooltip>
+
       </Box>
     </div>
   )

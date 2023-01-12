@@ -11,6 +11,9 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Tooltip from '@mui/material/Tooltip';
 
 
 export default function FavoriteCountries() {
@@ -101,20 +104,23 @@ export default function FavoriteCountries() {
                       </Typography>
                     </Grid>
                     <Grid item>
-                      <Typography
+                    <Tooltip title="Remove from wishlist">
+                      <Button
+                        variant="text"
+                        startIcon={<DeleteIcon />}
                         sx={{
                           cursor: 'pointer',
                           color: 'black',
                           fontFamily: 'nunito',
-                          fontWeight: '800',
+                          fontWeight: '700',
                         }}
-                        variant='body2'
                         onClick={() => {
                           handleRemove(country.name.common);
                         }}
                       >
                         Remove
-                      </Typography>
+                      </Button>
+                      </Tooltip>
                     </Grid>
                   </Grid>
                 </Grid>

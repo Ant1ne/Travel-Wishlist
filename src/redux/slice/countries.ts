@@ -30,26 +30,26 @@ const countrySlice = createSlice({
             state.wish.push(actions.payload)
             },
         removeWish: (state, actions) => {
-            const filter = state.wish.filter(
-                (country) => country.name.common.toLocaleLowerCase()
-                !== actions.payload.toLocaleLowerCase());
-                state.wish = filter;
-            },
+          const filter = state.wish.filter(
+              (country) => country.name.common.toLocaleLowerCase()
+              !== actions.payload.toLocaleLowerCase());
+              state.wish = filter;
+          },
         showLoading: (state, actions) => {
-            state.showLoading = actions.payload;
-            },
-            sortByName: (state) => {
-                const sort = state.countries.sort(function (a, b) {
-                  if (a.name.common > b.name.common) {
-                    return 1;
-                  }
-                  if (a.name.common < b.name.common) {
-                    return -1;
-                  }
-                  return 0;
-                });
-                state.countries = sort;
-              },
+          state.showLoading = actions.payload;
+        },
+        sortByName: (state) => {
+          const sort = state.countries.sort(function (a, b) {
+            if (a.name.common > b.name.common) {
+              return 1;
+            }
+            if (a.name.common < b.name.common) {
+              return -1;
+            }
+            return 0;
+          });
+          state.countries = sort;
+        },
               sortByNameReverse: (state) => {
                 state.countries.sort(function (a, b) {
                   if (a.name.common > b.name.common) {

@@ -10,6 +10,7 @@ import TableCell from '@mui/material/TableCell';
 import BookmarkBorderSharpIcon from '@mui/icons-material/BookmarkBorderSharp';
 import BookmarkSharpIcon from '@mui/icons-material/BookmarkSharp';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
+import Tooltip from '@mui/material/Tooltip';
 
 
 
@@ -60,6 +61,7 @@ export default function CountryRow({
       </TableCell>
       <TableCell align='center' sx={style}>
         {!wish ?(
+          <Tooltip title="Add to wishlist">
             <BookmarkBorderSharpIcon
               aria-label="Add to wishlist"
               sx={{ cursor: 'pointer' }}
@@ -67,7 +69,10 @@ export default function CountryRow({
                 addWishHandler(country);
                 handleClick();
               }}
-            />) : (
+            />
+          </Tooltip>
+            ) : (
+          <Tooltip title="Remove from wishlist">
             <BookmarkSharpIcon
               aria-label="Added to wishlist"
               sx={{
@@ -78,14 +83,18 @@ export default function CountryRow({
                 addWishHandler(country);
                 handleWishClose();
               }}
-            />)}
+            />
+          </Tooltip>
+          )}
 
       </TableCell>
       <TableCell align='center' sx={style}>
         <Link to={`/name/${country.name.common}`}>
-          <ReadMoreIcon
-            sx={{ cursor: 'pointer' }}
-          />
+          <Tooltip title="Read more">
+            <ReadMoreIcon
+              sx={{ cursor: 'pointer' }}
+            />
+          </Tooltip>
         </Link>
       </TableCell>
     </TableRow>

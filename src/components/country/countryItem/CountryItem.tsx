@@ -15,12 +15,16 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import Tooltip from '@mui/material/Tooltip';
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import BookmarkBorderSharpIcon from '@mui/icons-material/BookmarkBorderSharp';
+
 
   // Mui alert
   const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -151,8 +155,8 @@ export default function CountryItem() {
               <b>Languages: </b>
               {
                 countryList[index].languages ? Object.values
-                (countryList[index].languages).map((languages) => (
-                  <li key={crypto.randomUUID()}>{languages}</li>
+                (countryList[index].languages).map((language) => (
+                  <li key={crypto.randomUUID()}>{language}</li>
                   )) : null
               }
               <br/>
@@ -173,21 +177,23 @@ export default function CountryItem() {
           }}
         >
           <Link to='/' style={{ textDecoration: 'none' }}>
-            <Button size='small' sx={{ fontFamily: 'nunito' }}>
-              Back
-            </Button>
+            <Tooltip title="Back to Homepage">
+              <ArrowBackIosIcon />
+            </Tooltip>
           </Link>
 
-          <Button
-              size='small'
-              sx={{ fontFamily: 'nunito' }}
-              onClick={() => {
-                wishBtnHandler(countryItem);
-                handleClick();
-              }}
-            >
-              Add to Wishlist
-            </Button>
+          <Tooltip title="Add to wishlist">
+            <BookmarkBorderSharpIcon
+                aria-label="Add to wishlist"
+                sx={{ cursor: 'pointer' }}
+                onClick={() => {
+                  wishBtnHandler(countryItem);
+                  handleClick();
+                }}
+              >
+                Add to Wishlist
+              </BookmarkBorderSharpIcon>
+            </Tooltip>
         </CardActions>
       </Card>
       <div>
