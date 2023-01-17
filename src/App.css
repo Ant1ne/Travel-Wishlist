@@ -98,3 +98,12 @@ a, a:visited, a:hover, a:active {
   justify-self: center;
   align-self: center;
 }
+
+/* Media Queries */
+@media (max-width: 600px) {
+  .footer {
+    text-align: center;
+    float: none;
+    margin: 0 auto 20px;
+  }
+}

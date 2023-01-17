@@ -1,39 +1,107 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import Badge, {BadgeProps} from '@mui/material/Badge';
-import { styled } from '@mui/material/styles';
+// file
+import { RootState } from '../../redux/store';
+
+// Mui
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box'
+import Badge from '@mui/material/Badge';
+import IconButton from '@mui/material/IconButton';
+import HomeIcon from '@mui/icons-material/Home';
+import BookmarkBorderSharpIcon from '@mui/icons-material/BookmarkBorderSharp';
+import InfoIcon from '@mui/icons-material/Info';
 import TravelExploreOutlinedIcon from '@mui/icons-material/TravelExploreOutlined';
 
 
-
-const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
-  '& .MuiBadge-badge': {
-    right: -8,
-    top: 1,
-    border: `2px solid ${theme.palette.background.paper}`,
-    padding: '0 4px',
-  },
-}));
-
 export default function NavBar() {
-  // const wishCount = wishListCountries.length;
+  // get wish state
+  const wishCount = useSelector((state: RootState) => state.country.wish);
+
   return (
-    <div className="navBar">
-      <div className="logo">
-        <a href="/" className='link'>
-          <TravelExploreOutlinedIcon />
-        </a>
-        <h3 className="logoTitle">Travel wishlist</h3>
-      </div>
-      <div className="subNav">
-        <Link className='link' to="/">Home</Link>
-        <Link className='link' to="/wishlist">Wishlist</Link>
-        {/* <Badge badgeContent={wishCount} color="primary">
-          <Link className='link' to="/wishlist">Wishlist</Link>
-        </Badge> */}
-        <Link className='link' to="/about">About</Link>
-      </div>
+    <div>
+      <Box sx={{ flexGrow: 1}}>
+        <AppBar
+          position='static'
+          sx={{
+            md: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            bgcolor: 'black',
+            alignItems: 'center',
+            height: '60px',
+          }}
+        >
+          <Box
+            sx={{
+              letterSpacing: 1,
+              fontSize: '25px',
+              fontWeight: '500',
+              marginLeft: '7%',
+            }}
+          >
+            <Link
+              to='/'
+              style={{
+                textDecoration: 'none',
+                color: 'white'
+              }}>
+              {''}
+            <TravelExploreOutlinedIcon />
+            Travel Wishlist
+            </Link>
+          </Box>
+
+          <Box
+            sx={{
+              display: {
+                xs: 'none',
+                md: 'flex',
+                justifyContent: 'flex-end',
+                paddingRight: '3%',
+              }
+            }}
+          >
+            <IconButton
+              size='large'
+              aria-label='Home'
+              title='Home'
+              color='inherit'
+              component={Link}
+              to='/'
+            >
+              <HomeIcon />
+            </IconButton>
+            <IconButton
+              size='large'
+              aria-label='Wishlist'
+              title='Wishlist'
+              color='inherit'
+              component={Link}
+              to='/wishlist'
+            >
+              <Badge
+                badgeContent={wishCount.length}
+                color='error'
+              >
+                <BookmarkBorderSharpIcon />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size='large'
+              aria-label='Wishlist'
+              title='About'
+              color='inherit'
+              component={Link}
+              to='/about'
+            >
+              <InfoIcon />
+            </IconButton>
+          </Box>
+        </AppBar>
+      </Box>
     </div>
   )
 }

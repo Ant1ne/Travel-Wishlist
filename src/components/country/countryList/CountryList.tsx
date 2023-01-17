@@ -13,7 +13,7 @@ import LoadingPage from '../../loading/LoadingPage';
 // Mui
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -25,7 +25,8 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { Box, Typography } from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
+import { styled } from '@mui/material/styles';
 
 // Mui table function
 function createData(
@@ -88,6 +89,16 @@ export default function CountryList() {
         fontSize: '17px',
         textAlign: 'center'
     };
+
+    const StyledTableCell = styled(TableCell)(({ theme }) => ({
+      [`&.${tableCellClasses.head}`]: {
+        backgroundColor: theme.palette.common.white,
+        color: theme.palette.common.black,
+      },
+      [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+      },
+    }));
 
     // Mui pagination for sticky table head
     const [page, setPage] = useState(0);
@@ -175,13 +186,13 @@ export default function CountryList() {
     };
 
     // sort by name
-    const [click, setClick] = useState(false);
+    const [sortClick, setSortClick] = useState(false);
     const dispatchSort = useDispatch();
     const handleOnSort: React.MouseEventHandler<HTMLTableCellElement> = (e) => {
       e.preventDefault();
-      !click
-        ? dispatchSort(actions.sortByName()) && setClick(true)
-        : dispatchSort(actions.sortByNameReverse()) && setClick(false);
+      !sortClick
+        ? dispatchSort(actions.sortByName()) && setSortClick(true)
+        : dispatchSort(actions.sortByNameReverse()) && setSortClick(false);
     };
 
   return (
@@ -196,28 +207,31 @@ export default function CountryList() {
             <Table stickyHeader aria-label="sticky table">
               <TableHead sx={style}>
                 <TableRow>
-                    <TableCell sx={style}>
+                    <StyledTableCell sx={style}>
                         Flag
-                    </TableCell>
-                    <TableCell sx={style} onClick={handleOnSort}>
-                      <Box>
-                        <Typography component="span" sx={style}>Name</Typography>
-                          <ArrowDropUpIcon />
+                    </StyledTableCell>
+                    <StyledTableCell sx={style}>
+                      Name
+                      <Tooltip title="Sort by name" onClick={handleOnSort}>
+                        {sortClick ? (
                           <ArrowDropDownIcon />
-                      </Box>
-                    </TableCell>
-                    <TableCell sx={style}>
+                        ):(
+                          <ArrowDropUpIcon />
+                        )}
+                      </Tooltip>
+                    </StyledTableCell>
+                    <StyledTableCell sx={style}>
                         Region
-                    </TableCell>
-                    <TableCell sx={style}>
+                    </StyledTableCell>
+                    <StyledTableCell sx={style}>
                         Population
-                    </TableCell>
-                    <TableCell sx={style}>
+                    </StyledTableCell>
+                    <StyledTableCell sx={style}>
                         Travel Wishlist
-                    </TableCell>
-                    <TableCell sx={style}>
+                    </StyledTableCell>
+                    <StyledTableCell sx={style}>
                         More Details
-                    </TableCell>
+                    </StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
