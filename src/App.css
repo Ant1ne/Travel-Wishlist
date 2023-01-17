@@ -83,7 +83,7 @@ a, a:visited, a:hover, a:active {
     z-index: 10;
 }
 
-/* Footer */
+/* Footer
 .footer {
   margin: 0px;
   padding: 50px;
@@ -100,10 +100,10 @@ a, a:visited, a:hover, a:active {
 }
 
 /* Media Queries */
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .footer {
     text-align: center;
     float: none;
-    margin: 0 auto 20px;
-  }
-}
+    margin: 0 auto 20px; */
+  /* }
+} */

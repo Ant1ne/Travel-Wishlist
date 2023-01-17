@@ -22,7 +22,7 @@ export default function NavBar() {
 
   return (
     <div>
-      <Box sx={{ flexGrow: 1}}>
+      <Box sx={{ flexGrow: 0}}>
         <AppBar
           position='static'
           sx={{
@@ -39,16 +39,15 @@ export default function NavBar() {
               letterSpacing: 1,
               fontSize: '25px',
               fontWeight: '500',
-              marginLeft: '7%',
+              marginLeft: '2%',
             }}
           >
             <Link
               to='/'
               style={{
                 textDecoration: 'none',
-                color: 'white'
+                color: 'white',
               }}>
-              {''}
             <TravelExploreOutlinedIcon />
             Travel Wishlist
             </Link>
