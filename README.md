@@ -1,61 +1,93 @@
-# FRONT END PROJECT
+<!-- PROJECT LOGO -->
+<div align="center">
+    <a href="https://front-end-project-delta.vercel.app/">
+    <img src="https://www.freepnglogos.com/uploads/logo-website-png/logo-website-file-globe-icon-svg-wikimedia-commons-21.png" width="200" alt="Logo"/>
+    </a>
 
-The front end project is to practice React with TypeScript and Redux. Completing all requirement, you will get 20 points/ 20 points. Good luck and HAVE FUN !!!
 
-# Link of deployed project
-https://front-end-project-alpha.vercel.app/
-## How to run project
 
-1. Step 1: yarn
-2. Step 2: yarn start
+<h3 align="center">Travel Wishlist - Your personal travel wishlist website</h3>
+  <p align="center">
+    Travel Wishlist is a personal project built with React, Redux Toolkit and TypeScript
+    <br />
+  </p>
+</div>
 
-## Logic Requirements (9 points)
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li><a href="#functionalities">Functionalities</a></li>
+    <li><a href="#author">Author</a></li>
+  </ol>
+</details>
 
-1. Fetch data from this API: `https://restcountries.com/v3.1/all`
-2. The user can search country by name
-3. Get country detail by this API: `https://restcountries.com/v3.1/name/{name}`
-4. When the user click to country name or a button it should show product detail
-5. The country detail should have name, region, population, flag and list of languages
-6. The user can add country to `Favorite` page
-7. When the user add a country to `Favorite` the favorite icon should change the color.
-8. Have a `Loading` page while fetching data
-9. Deploy the project
 
-## Styling Requirements (4 points)
 
-1. Font: `font-family: 'Nunito', sans-serif`
-2. Display data in table
-3. Navbar and Footer
-4. When the user add an country to `Favorite` page, you should show a message, for example: `A country just added to the favorite page`
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-## Code style Requirements (6 points)
+The objective of this project was to develop from scratch a front-end project, with data fetched from a RESTful API, built with only with the following stack:
 
-1. Naming convention
-2. Clear file structure
-3. Divided the project to small components
-4. Clean code: no console.log, no dead code,
-5. Format code (Prettier - Code formatter)
-6. Separate import from your own file and the import from the package
+### Built With
 
-## Extra requirements (1 points)
+* [![HTML5][HTML5]][HTML5-url]
+* [![CSS3][CSS3]][CSS3-url]
+* [![TypeScript][TypeScript]][TypeScript-url]
+* [![React][React.js]][React-url]
+* [![Redux][Redux]][Redux-url]
+* [![Material-UI][Material-UI]][Material-UI-url]
+* [![Node.js][Node.js]][Node-url]
 
-ONLY DO THIS PART WHEN YOU HAVE COMPLETED THE REQUIREMENTS PART
 
-1. Sorting by product name
 
-## Useful sources
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-1. API information: `https://restcountries.com/`
-2. Alert: `https://mui.com/material-ui/react-snackbar/#main-content`
-3. Table: `https://mui.com/material-ui/react-table/#basic-table`
-4. Data grid: `https://mui.com/x/react-data-grid/components/#main-content`
-5. Font: `https://fonts.google.com/specimen/Nunito`
-6. Deploy: ` https://vercel.com/`, `https://www.netlify.com/ `
-7. Prettier - Code formatter - Extension in VSCode
+<!-- Functionalities -->
+## Functionalities
 
-## Screenshots
+- [ ] All the data is fetched from a <a href="https://restcountries.com">RESTful API</a>
+- [ ] The user can search country by name
+- [ ] When the user click on the "More details" button, more info about the country will be shown (name, region, capital, population, flag and list of languages, location)
+- [ ] The user can add country to "Wishlist" page
+- [ ] When the user add a country to Favorite the favorite icon should change the color.
 
-![Country list](https://raw.githubusercontent.com/Andreaa-Dev/Country-list/master/src/images/allCountries.png)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-![Country detail](https://raw.githubusercontent.com/Andreaa-Dev/Country-list/master/src/images/eachCountry.png)
-# Travel-Wishlist
+<!-- AUTHORS -->
+## Authors:
+* [Antoine]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Redux]: https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white
+[Redux-url]: https://redux-toolkit.js.org/
+[TypeScript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
+[TypeScript-url]: https://www.typescriptlang.org/
+[HTML5]: https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white
+[HTML5-url]: https://html.spec.whatwg.org/multipage/
+[CSS3]: https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white
+[CSS3-url]: https://www.w3.org/Style/CSS/Overview.en.html
+[Material-UI]: https://img.shields.io/badge/Material--UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white
+[Material-UI-url]: https://mui.com/
+[MongoDB]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
+[MongoDB-url]: https://www.mongodb.com/
+[Express.js]: https://img.shields.io/badge/Express.js-404D59?style=for-the-badge
+[Express-url]: https://expressjs.com/
+[Node.js]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
+[Node-url]: https://nodejs.org/en
+
+[Antoine]: https://github.com/Ant1ne
+
